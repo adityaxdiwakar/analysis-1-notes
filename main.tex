@@ -1,0 +1,109 @@
+\documentclass[14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[lmargin=1.5in, rmargin=1.5in, bmargin=0.75in]{geometry}
+\usepackage{enumitem}
+\usepackage{etoc}
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+
+\theoremstyle{definition}
+\theoremstyle{axiom}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{axiom}{Axiom}[section]
+
+\renewcommand*\contentsname{Table of Contents}
+\renewcommand{\headrulewidth}{0pt}
+\graphicspath{ {./img/} }
+\setcounter{tocdepth}{1}
+
+\etocsettocstyle{}{}
+
+\begin{document}
+
+\begin{titlepage}
+   \begin{center}
+       \vspace*{1cm}
+
+       \textbf{\LARGE Real Analysis I}
+
+       \vspace{0.5cm}
+
+       {\Large ...something something real numbers}
+            
+       \vspace{1.5cm}
+
+       \textbf{\Large Aditya Diwakar}
+
+       \vfill
+            
+       \large{In hopes to not fail MATH 4317\dots
+            
+       \vspace{0.8cm}
+     
+       Georgia Institute of Technnology\\
+       May 13th, 2021}
+            
+   \end{center}
+\end{titlepage}
+
+\section{Introduction}
+This is a collection of notes taken while self studying Real Analysis from Terrence Tao's Analysis book.
+It is meant for personal use, but it is open sourced so that others can benefit as well. In the case
+there is an issue with these notes, please write an email to aditya@diwakar.io. A table of contents is
+presented below.
+
+\tableofcontents
+\pagebreak
+\setcounter{tocdepth}{3}
+
+\section{Natural Numbers}
+\localtableofcontents
+
+\vspace{0.5cm}
+
+\noindent
+The most basic of numerical structures, the natural numbers are the smallest subset of infinite numbers
+contained in every other set we will discuss.
+
+\subsection{The Peano Axioms}
+\begin{definition}
+    A natural number is any number in the set given by
+    \begin{align*}
+        N \coloneqq \{0, 1, 2, 3, 4, \dots\}
+    \end{align*}
+    and the entire set is known as the natural numbers, denoted $\mathbb{N}$.
+\end{definition}
+
+For the sake of this class, the natural numbers excluding $0$, given by $\mathbb{N}\setminus \{0\}$
+is denoted by $\mathbb{Z}^\plus$ (positive integers).
+
+\begin{axiom}
+    0 is a natural number and if $n$ is a natural number, this implies that $n++$ is also a natural number.
+    This iteratively constructs the set $\mathbb{Z}$. 
+\end{axiom}
+
+\begin{axiom}
+    Further, it is not possible to reach $0$ from any other natural number. In other words, 
+    $0$ is the successor of no natural number.
+\end{axiom}
+
+There is another issue with this definition and it is given by the fact that this does not 
+definitievely construct the natural numbers as $0 \to 1 \to 2 \to 2 \to 2 \to 2 \to \cdots$
+is a valid number system by this design. We want to limit this from happening by introducing:
+
+\begin{axiom}
+    If two natural numbers are different, then their successors are also different. In other words,
+    $m \neq n \implies m\tiny{++} \neq n\tiny{++}$.
+\end{axiom}
+
+\vspace{1cm}
+
+\end{document}
+
