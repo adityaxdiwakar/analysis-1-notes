@@ -18,11 +18,14 @@
 \newtheorem{definition}{Definition}[section]
 \newtheorem{axiom}{Axiom}[section]
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{example}{Example}[section]
 
 \renewcommand*\contentsname{Table of Contents}
 \renewcommand{\headrulewidth}{0pt}
 \graphicspath{ {./img/} }
 \setcounter{tocdepth}{1}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
 
 \etocsettocstyle{}{}
 
@@ -123,5 +126,84 @@ then $\exists\inf E\in S$.
     $\alpha = \inf E$. 
 \end{proof}
 
-\end{document}
+\pagebreak
 
+\section{Finite and Countable Sets}
+The notion of sets and the cardinality of those sets is obvious from prerequisite content. However, when we have an infinite set,
+there are different characteristics that should be discussed. Not all infinity is the same. 
+
+\begin{definition}
+    Let there exist a set $J_n$ where $n\in \mathbb{Z}^+$. For any set $A$, we say:
+    \begin{enumerate}[label=(\alph*)]
+        \item A is finite if $A \sim J_n$ for some $n$ ($\sim$ is an equivelance relation)
+        \item A is infinite if A is not finite
+        \item A is countable if $A\sim J_n$ (for some $n$)
+        \item A is uncountable if A is neither finite nor countable
+        \item A is at most countable if A is finite or countable
+    \end{enumerate}
+\end{definition}
+
+\noindent
+Another word for countable sets is enumerable/denumerable sets.
+
+\begin{example}
+    How do we arrange the set of all integers as a countable set?
+
+    \begin{proof} If we arrange the integers $A = \mathbb{Z}$ starting with 0 and then the positive
+        integer before that integer's additive inverse, then we can see that $\mathbb{Z}$ is countable.
+        \begin{align*}
+            A:\quad &0, 1, -1, 2, -2, 3, -3\\
+            J:\quad &1, 2, 3, 4, 5, 6, 7
+        \end{align*}
+    \end{proof}
+    In general, this would mean that we can define some function that shows $\mathbb{Z}$ is countable, like so:
+    \begin{align*}
+        \begin{cases}
+            0 & n = 0\\
+            \frac{n}{2} & n\equiv 0 \Mod{2}\\
+            \frac{-(n-1)}{2} & n\equiv 1 \Mod{2}
+        \end{cases}
+    \end{align*}
+\end{example}
+
+\pagebreak
+\begin{theorem}
+    Every infinite subset of a countable set $A$ is countable.
+
+    \begin{proof}
+        Since $A$ is countable and $E$ is an infinite subset, we can arrange $A$ in a way that makes it obvious that $A\sim J$. 
+        With this in mind, we can say every element of $A$ has a certain index. From this, we define $n_k$ as the $k^{th}$ value 
+        in $E$ (meaning $x_{n_k} \in E$). Let $x_{n_1}$ be the smallest value in $E$ and then define $n_2, n_3, ...$ as the next
+        smallest values. From this, we now see that $k$ is the index for the values in $E$. In other words, we have $f(k) = x_{n_k}$
+        showing that $E\sim J\implies E$ is countable.
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Let $A$ and $\Omega$ be sets and suppose that with each element $\alpha$ of $A$, there is an associated subset of $\Omega$
+    denoted by $E_\alpha$. Further, the set of sets (family or collection of sets) for all the difference $\alpha\in A$ is denoted
+    by $\{E_\alpha\}$
+\end{definition}
+
+\begin{theorem}
+    Let $\{E_n\}$ where $n\in \mathbb{Z}^+$ be a sequence of countable sets (elements are sets) and let
+    \begin{align*}
+        S = \bigcup_{n=1}^\infty E_n
+    \end{align*}
+    then $S$ is countable ($S\sim J$).
+\end{theorem}
+
+\begin{theorem}
+    The set of all rational numbers is countable.
+
+    \begin{proof}
+        At first glance, this does not look intuitive. However, if we construct $\mathbb{Q}$ as pairs of elements in $\mathbb{Z}$, then
+        $\mathbb{Q}$ is simply defined as $(a, b)$ with $a, b\in \mathbb{Z}$. In fact, if $b = 1$, then $(a, 1)$ with $a\in \mathbb{Z}$
+        is $\mathbb{Z}$ itself. We know that this set of pairs is countable, meaning that the rational numbers are countable.
+    \end{proof}
+\end{theorem}
+
+Not every infinite set is countable. A quick trivial example of this would be a set with elements $0$ or $1$ which cannot be indexed, this
+set is not countable (ex: $A = \{1, 0, 0, 1, 0, 1, 1, 1, ...\} \not\sim J$)
+
+\end{document}
