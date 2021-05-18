@@ -1,8 +1,9 @@
 \documentclass[14pt]{extarticle}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{amssymb}
-\usepackage[lmargin=1.5in, rmargin=1.5in, bmargin=0.75in]{geometry}
+\usepackage[lmargin=1.5in, rmargin=1.5in, bmargin=1in]{geometry}
 \usepackage{enumitem}
 \usepackage{etoc}
 \usepackage{mathtools}
@@ -13,8 +14,10 @@
 \fancyhf{}
 \fancyhead[R]{\thepage}
 
-\newtheorem{definition}{Definition}[subsection]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
 \newtheorem{axiom}{Axiom}[section]
+\newtheorem{theorem}{Theorem}[section]
 
 \renewcommand*\contentsname{Table of Contents}
 \renewcommand{\headrulewidth}{0pt}
@@ -52,56 +55,73 @@
 \end{titlepage}
 
 \section{Introduction}
-This is a collection of notes taken while self studying Real Analysis from Terrence Tao's Analysis book.
-It is meant for personal use, but it is open sourced so that others can benefit as well. In the case
-there is an issue with these notes, please write an email to aditya@diwakar.io. A table of contents is
-presented below.
+This is a collection of notes taken while self studying Real Analysis from the book Principles of 
+Mathematical Analysis. It is meant for personal use, but it is open sourced so that others can benefit 
+as well. In the case there is an issue with these notes, please write an email to aditya@diwakar.io. 
+A table of contents is presented below.
 
 \tableofcontents
 \pagebreak
 \setcounter{tocdepth}{3}
 
-\section{Natural Numbers}
-\localtableofcontents
+\section{Ordered Sets}
+Ordered sets are any sets that have a definition regarding order in them. Essentially, if there is some
+well-defined relation that determines which element precedes any other element.
 
-\vspace{0.5cm}
-
-\noindent
-The most basic of numerical structures, the natural numbers are the smallest subset of infinite numbers
-contained in every other set we will discuss.
-
-\subsection{The Peano Axioms}
 \begin{definition}
-    A natural number is any number in the set given by
-    \begin{align*}
-        N \coloneqq \{0, 1, 2, 3, 4, \dots\}
-    \end{align*}
-    and the entire set is known as the natural numbers, denoted $\mathbb{N}$.
+    Suppose $S$ is an ordered set and we take $E \subset S$. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item If there exists some element $\alpha\in S$ such that
+        $\alpha \geq e$ for every $e\in E$, then we say that $E$ is bounded from above (and it is bounded by $\alpha$).
+
+    \item If there exists some element $\beta \in S$ such that $\beta \leq e$ for every $e\in E$, then we say $E$ is bounded from below
+        (and it is bounded beta $\beta$)
+    \end{enumerate}
+
 \end{definition}
 
-For the sake of this class, the natural numbers excluding $0$, given by $\mathbb{N}\setminus \{0\}$
-is denoted by $\mathbb{Z}^\plus$ (positive integers).
+Obviously, there can be more than one bounding number as it is not required that the bound exists in the set it bounds. In fact, if
+there exists an upper or lower bound on a set, then there will always be a number greater or a number smaller that is also a bound (on 
+either bound). To combat this lack of specificity, we define the following:
 
-\begin{axiom}
-    0 is a natural number and if $n$ is a natural number, this implies that $n++$ is also a natural number.
-    This iteratively constructs the set $\mathbb{Z}$. 
-\end{axiom}
+\begin{definition}
+    Suppose we have $S$ which is an ordered set and have $E\subset S$ that is bounded. Let us say there exists some $\alpha, \beta \in S$
+    where $\alpha$ is an upper bound and $\beta$ is a lower bound.
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $\gamma < \alpha \implies \gamma$ is not an upper bound for every $\gamma$, then $\alpha$ is the least upper bound 
+            (supremum).
+            \begin{align*}
+                \alpha = \sup E
+            \end{align*}
+        \item If $\gamma > \beta \implies \gamma$ is not a lower bound for every $\gamma$, then $\alpha$ is the greatest lower bound 
+            (infimum).
+            \begin{align*}
+                \beta = \inf E
+            \end{align*}
+    \end{enumerate}
+\end{definition}
 
-\begin{axiom}
-    Further, it is not possible to reach $0$ from any other natural number. In other words, 
-    $0$ is the successor of no natural number.
-\end{axiom}
+It is clear that if $E\subset S$ where $E \neq \emptyset$ is bounded above, then $\exists\sup E \in S$ and similarly if bounded below,
+then $\exists\inf E\in S$.
 
-There is another issue with this definition and it is given by the fact that this does not 
-definitievely construct the natural numbers as $0 \to 1 \to 2 \to 2 \to 2 \to 2 \to \cdots$
-is a valid number system by this design. We want to limit this from happening by introducing:
+\pagebreak
+\begin{theorem}
+    Suppose $S$ is an ordered set and $E\subset S$ and $E$ is bounded below. Let $L$ be the set of all the possible lower bounds of $E$,
+    then
+    \begin{align*}
+        \left(\alpha \in S\right) = \sup L = \inf E
+    \end{align*}
+    This means that the supremum of the set of lower bounds is the infimum of the subset itself.
+\end{theorem}
 
-\begin{axiom}
-    If two natural numbers are different, then their successors are also different. In other words,
-    $m \neq n \implies m\tiny{++} \neq n\tiny{++}$.
-\end{axiom}
-
-\vspace{1cm}
+\begin{proof}
+    Since $E$ is bounded by below, we have $L\neq \emptyset$. Notice, that since $L$ is the set of lower bounds, every element $e\in E$
+    is greater than every element $y\in L$. Hence, $L$ is bounded from above and $\exists\sup L\in S$, say $\alpha$.
+    
+    Next, notice that for any element $\gamma \in E$, we have that $\gamma \geq \alpha$ by definition. This is beacuse $\alpha$ is the
+    greatest element in $L$ and $L$ is the set of lower bounds. In words, $\alpha$ is the greatest lower bound. By definition,
+    $\alpha = \inf E$. 
+\end{proof}
 
 \end{document}
 
