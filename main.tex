@@ -206,4 +206,64 @@ Another word for countable sets is enumerable/denumerable sets.
 Not every infinite set is countable. A quick trivial example of this would be a set with elements $0$ or $1$ which cannot be indexed, this
 set is not countable (ex: $A = \{1, 0, 0, 1, 0, 1, 1, 1, ...\} \not\sim J$)
 
+\pagebreak
+
+\section{Fields}
+A field (from abstract algebra) has two operations: addition and multiplication. Further, it also has multiplicative inverses
+when the element is not zero.
+
+\begin{axiom}
+    Every field follows the following axioms: 
+    \begin{enumerate}[label=(\alph*)]
+        \item Axioms for addition
+            \begin{enumerate}[label=(\arabic*)]
+                \item $x, y\in F \implies x + y\in F$ 
+                \item $\forall x,y\in F:\ x + y = y + x$
+                \item $\forall x,y,z\in F:\ (x + y) + z = x + (y + z)$ 
+                \item $\exists\ 0\in F:\ 0 + x = x,\ \forall x\in F$
+                \item $\exists\ -x\in F\ \forall\ x\in F$ such that $-x + x = 0$
+            \end{enumerate}
+        \item Axioms for multiplication
+            \begin{enumerate}[label=(\arabic*)]
+                \item $x, y\in F \implies xy\in F$ 
+                \item $\forall x,y\in F:\ xy = yx$
+                \item $\forall x,y,z\in F:\ (xy)z = x(yz)$
+                \item $\exists\ 1\in F:\ 1x = x,\ \forall x\in F$
+                \item $\exists\ 1/x\in F\ \forall\ x\in F$ such that $x(1/x) = 1$
+            \end{enumerate}
+        \item Distributive laws
+            \begin{align*}
+                x(y + z) = xy + xz\quad \forall x,y,z\in F
+            \end{align*}
+    \end{enumerate}
+\end{axiom}
+
+There are numerous theorems that can be proved from here which define standard algebraic operations. Many of these are trivial and
+will be omitted accordingly.
+
+\begin{theorem}
+    The field R which is ordered and has the least upper-bound property. 
+\end{theorem}
+
+Reminder, this property is if a bound exists on a nonempty subset, then $\sup E$ exists (if $E\subset R$)
+
+\pagebreak
+
+\begin{theorem} Archimedean property (a) and Q dense in R (b)
+    \begin{enumerate}[label=(\alph*)]
+        \item $x,y\in R$ with $x > 0 \implies \exists\ n\in \mathbb{Z}^+: nx > y$
+        \item $x,y\in R$ with $x < y \implies \exists\ p\in \mathbb{Q}: x < p < y$
+    \end{enumerate}
+
+    The proof is simple, but not important. (a) is proved using a contradiction assuming that $y$ is the upper bound of the set, which
+    is false. (b) is a bit more tricky, but essentially concludes that $\mathbb{Q}$ is dense in $\mathbb{R}$ and between any
+    two irrational numbers exists a rational number (given by $p\in \mathbb{Q}$)
+\end{theorem}
+
+\begin{theorem}
+    $\forall x>0\in R, n>0\in \mathbb{Z}$, there exists a unique $y\in R: y^n = x$
+\end{theorem}
+
+The proof of this theorem makes use of showing contradictions appear for when $y^n < x$ and $y^n > x$ leaving $y^n = x$ as the
+only remaining option.
 \end{document}
