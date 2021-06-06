@@ -1,0 +1,136 @@
+\documentclass[14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[lmargin=1.3in, rmargin=1.3in, bmargin=0.75in]{geometry}
+\usepackage{enumitem}
+\usepackage{etoc}
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{axiom}{Axiom}[section]
+\lhead{Problem Set 1 - Aditya Diwakar}
+
+\setlength\parindent{0pt}
+
+
+\etocsettocstyle{}{}
+
+\begin{document}
+
+\section*{Problem Set 1}
+
+\textbf{Question 1} Let $m$ and $n$ be positive integers with no common factor. Prove that if $\sqrt{m/n}$ is rational, then $m$
+and $n$ are both perfect squares, that is to say there exists integers $p$ and $q$ such that $m = p^2$ and $n = q^2$.\\
+
+\textit{Proof.} We are given that $\sqrt{m/n}$ is rational, meaning $\sqrt{m/n} = p/q$ where $p, q$ are uniquely determined as the 
+irreducible rational equal to $\sqrt{m/n}$. Squaring both sides gives: 
+\begin{align*}
+    \left(\sqrt{\frac{m}{n}}\right)^2 = \left(\frac{m}{n}\right)^2 \implies \frac{m}{n} = \frac{p^2}{q^2} 
+\end{align*}
+
+Unfortunately, this is not enough to say that $m = p^2$ and $n = q^2$. We have to reason that $p^2/q^2$ is also irreducible. Notice
+that due to the fact that we can factor integers into unqiue primes, we have $p = p_1p_2\cdots p_n$ and $q = q_1q_2\cdots q_n$. Let the set
+of primes that compose each number be $P$ and $Q$. Since $P$ and $Q$ have no common factors, $P \cap Q = \emptyset$. Squaring either of
+these numbers yields these prime factors being seen twice in the lists $PQ$ and $QS$, but $PS\cap QS = \emptyset$. This helps
+to conclude that $p^2 / q^2$ is irreducible and therefore $m = p^2$ and $n = q^2$.
+\hfill
+$\blacksquare$
+
+\rule{\textwidth}{0.75pt}
+\vspace{2mm}
+
+\textbf{Question 2} Prove that no order can be defined in the complex field that turns it into an ordered field\\
+
+\textit{Proof.} Let there exist an ordering on the complex field. Since all squares are positive, $i^2 = -1 \geq 0$. This means we can 
+say the following:
+\begin{align*}
+    1 = 0 + 1 \leq -1 + 1 = 0 \leq 1
+\end{align*}
+This says that $1\leq 0$ and also $1 \geq 0$ which means $1 = 0$, so we have reached a contradiction and an ordering cannot exist.
+\hfill
+$\blacksquare$
+\rule{\textwidth}{0.75pt}
+\pagebreak
+
+
+\textbf{Question 3} Suppose $z = a + bi, w = c + di$. Define $z < w$ is $a < c$, and also if $a = c$ but $b < d$. Prove that this
+turns the set of all complex numbers into an ordered set. Does this ordered set have the least-upper-bound property?\\
+
+\textit{Proof.} To show that this is an ordered set, we need to show that any distinct numbers are either greater or less than the other.
+If we take $z = a + bi$ and $w = c + di$ where $z\neq w$ then this means either $a > c$ or $a < c$ if $a \neq c$. Further, if $a = c$, then
+$b \neq d$ meaning either $b > d$ or $b < d$. Either way, $z\neq w \implies z > w$ or $z < w$.\\
+
+Further, this is transitive as well since if $x = a + bi, y = c + di, z = e + fi$ and $x < y$ and $y < z$, then $x < z$ since
+if $x < y$, it means $a \leq c$ and $c\leq e$ so $a \leq e$. In the case $a = e$, then $a = c$ meaning that $b < d$ and $d < e$ meaning
+$b < e$. In either case, it means that $x < z$. Hence, it means $\mathbb{C}$ is an ordered set.\\
+
+For the least-upper-bound property, we can consider an imaginary line with $a = 0$ and notice that this is bounded, but there exists
+no least upper bound since for any $a > 0$, there is always a value $a$ closer to $0$ then what we think is the least upper bound.
+\hfill
+$\blacksquare$
+
+\rule{\textwidth}{0.75pt}
+\vspace{2mm}
+
+
+\textbf{Question 4} Let $\mathbb{R}$ be the set of real numbers and suppose $f: \mathbb{R} \to \mathbb{R}$ is a function such that
+for all real numbers $x$ and $y$ the following two equations hold:
+\begin{align*}
+    f(x + y) &= f(x) + f(y)\\[2mm]
+    f(xy) &= f(x)f(y)
+\end{align*}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Prove that $f(0) = 0$ and that $f(1) \in \{0, 1\}$\\
+
+        \textit{Proof.} $f(0) = 0$ as $f(0) = f(0 + 0) = f(0) = f(0) = 2f(0)$ which is only possible if $f(0) = 0$. $f(1)$ is
+        either $0$ or $1$ since $f(1) = f(1)f(1) = f(1)^2$ and $x = x^2$ is only true when $x = 0, 1$ so $f(1)\in \{0, 1\}$
+        \hfill
+        $\blacksquare$
+
+    \pagebreak
+
+\item Prove that $f(n) = nf(1)$ for every integer $n$ and that $f(n/m) = (n/m)f(1)$ for all integers $n,m$ such that $m\neq 0$. Conclude
+    that either $f(q) = 0$ for all rational numbers $q$ or $f(q) = q$ for all rational numbers $q$.\\
+
+        \textit{Proof.} Notice that $f(n) = f(1 + 1 + \cdots + 1) = f(1) + f(1) + \cdots + f(1) = nf(1)$. Now, assume that
+        $f(n/m) = (n/m)f(1)$. Multiply both sides by $mf(1) = f(m)$ like so: $f(n/m)mf(1) = (n/m)f(1)mf(1)$ and remember that
+        $f(1)^2 = f(1)$ since $f(1) = 0$ or $1$. Leaving $f(n/m)mf(1) = nf(1) \implies f(n/m)f(m) = nf(1)$. Since
+        $f(xy) = f(x)f(y)$, this means $f(n/m)f(m) = f(n)$ on the left hand side and the right hand side is $f(n)$ and indeed,
+        $f(n) = f(n)$ so there is no contradiction.
+        \hfill
+        $\blacksquare$
+
+    \item Prove that $f$ is nondecreasing, that is to say that $f(x) \geq f(y)$ whenever $x \geq y$ for any $x,y\in \mathbb{R}$\\
+
+        \textit{Proof.} Notice that every positive number has a real number square root so we can say that $\forall x \geq 0$ $\exists y:
+        x = y^2$. Also, notice that $f(x) + f(-x) = f(0) = 0$ so $f(x) = f(-x)$. Since we are given that $x\geq y$, then $x-y\geq 0$,
+        then $f(x) - f(y) = f(x) + f(-y) = f(x - y)$ and since $x - y\geq 0$, then $f(x - y) \geq 0$ meaning $f(x) - f(y) \geq 0$
+        so $f(x) \geq f(y)$.
+        \hfill
+        $\blacksquare$
+
+    \item Prove that if $f(1) = 0$ then $f(x) = 0$ for all real numbers $x$. Prove that if $f(1) = 1$ then $f(x) = x$ for all 
+        real numbers $x$.\\
+
+        \textit{Proof.} In the case that $f(1) = 0$ then $f(x) = 0$ for all rational numbers as $f(n/m) = (n/m)f(1) = 0$. Notice any
+        real number is neighbored by two real numbers infinitely close, hence $\exists p, q\in \mathbb{Q}$ such that $p\leq x\leq q$ 
+        (since $f$ is strictly non-decreasing). Since $f(p) = 0$ and $f(q) = 0$, then $0\leq f(x)\leq q$ leaves $f(x) = 0$.\\
+
+        When $f(1) = 1$, then $f(x) = x$ for all rational numbers as $f(n/m) = (n/m)$. There exist $p, q\in Q$
+        that are infinitely close to $x$ that are between $x \pm \frac{1}{n}$ and $x$ ($p\leqx\leq q$). 
+        As $n\to \infty$, this means that $p, q$ converges to $x$. Hence, $f(x) = x$.
+        \hfill
+        $\blacksquare$
+
+\end{enumerate}
+
+\end{document}
+
