@@ -1,8 +1,9 @@
 \documentclass[14pt]{extarticle}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{amssymb}
-\usepackage[lmargin=1.5in, rmargin=1.5in, bmargin=0.75in]{geometry}
+\usepackage[lmargin=1.5in, rmargin=1.5in, bmargin=1in]{geometry}
 \usepackage{enumitem}
 \usepackage{etoc}
 \usepackage{mathtools}
@@ -13,13 +14,18 @@
 \fancyhf{}
 \fancyhead[R]{\thepage}
 
-\newtheorem{definition}{Definition}[subsection]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
 \newtheorem{axiom}{Axiom}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{example}{Example}[section]
 
 \renewcommand*\contentsname{Table of Contents}
 \renewcommand{\headrulewidth}{0pt}
 \graphicspath{ {./img/} }
 \setcounter{tocdepth}{1}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
 
 \etocsettocstyle{}{}
 
@@ -52,56 +58,212 @@
 \end{titlepage}
 
 \section{Introduction}
-This is a collection of notes taken while self studying Real Analysis from Terrence Tao's Analysis book.
-It is meant for personal use, but it is open sourced so that others can benefit as well. In the case
-there is an issue with these notes, please write an email to aditya@diwakar.io. A table of contents is
-presented below.
+This is a collection of notes taken while self studying Real Analysis from the book Principles of 
+Mathematical Analysis. It is meant for personal use, but it is open sourced so that others can benefit 
+as well. In the case there is an issue with these notes, please write an email to aditya@diwakar.io. 
+A table of contents is presented below.
 
 \tableofcontents
 \pagebreak
 \setcounter{tocdepth}{3}
 
-\section{Natural Numbers}
-\localtableofcontents
+\section{Ordered Sets}
+Ordered sets are any sets that have a definition regarding order in them. Essentially, if there is some
+well-defined relation that determines which element precedes any other element.
 
-\vspace{0.5cm}
-
-\noindent
-The most basic of numerical structures, the natural numbers are the smallest subset of infinite numbers
-contained in every other set we will discuss.
-
-\subsection{The Peano Axioms}
 \begin{definition}
-    A natural number is any number in the set given by
-    \begin{align*}
-        N \coloneqq \{0, 1, 2, 3, 4, \dots\}
-    \end{align*}
-    and the entire set is known as the natural numbers, denoted $\mathbb{N}$.
+    Suppose $S$ is an ordered set and we take $E \subset S$. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item If there exists some element $\alpha\in S$ such that
+        $\alpha \geq e$ for every $e\in E$, then we say that $E$ is bounded from above (and it is bounded by $\alpha$).
+
+    \item If there exists some element $\beta \in S$ such that $\beta \leq e$ for every $e\in E$, then we say $E$ is bounded from below
+        (and it is bounded beta $\beta$)
+    \end{enumerate}
+
 \end{definition}
 
-For the sake of this class, the natural numbers excluding $0$, given by $\mathbb{N}\setminus \{0\}$
-is denoted by $\mathbb{Z}^\plus$ (positive integers).
+Obviously, there can be more than one bounding number as it is not required that the bound exists in the set it bounds. In fact, if
+there exists an upper or lower bound on a set, then there will always be a number greater or a number smaller that is also a bound (on 
+either bound). To combat this lack of specificity, we define the following:
+
+\begin{definition}
+    Suppose we have $S$ which is an ordered set and have $E\subset S$ that is bounded. Let us say there exists some $\alpha, \beta \in S$
+    where $\alpha$ is an upper bound and $\beta$ is a lower bound.
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $\gamma < \alpha \implies \gamma$ is not an upper bound for every $\gamma$, then $\alpha$ is the least upper bound 
+            (supremum).
+            \begin{align*}
+                \alpha = \sup E
+            \end{align*}
+        \item If $\gamma > \beta \implies \gamma$ is not a lower bound for every $\gamma$, then $\alpha$ is the greatest lower bound 
+            (infimum).
+            \begin{align*}
+                \beta = \inf E
+            \end{align*}
+    \end{enumerate}
+\end{definition}
+
+It is clear that if $E\subset S$ where $E \neq \emptyset$ is bounded above, then $\exists\sup E \in S$ and similarly if bounded below,
+then $\exists\inf E\in S$.
+
+\pagebreak
+\begin{theorem}
+    Suppose $S$ is an ordered set and $E\subset S$ and $E$ is bounded below. Let $L$ be the set of all the possible lower bounds of $E$,
+    then
+    \begin{align*}
+        \left(\alpha \in S\right) = \sup L = \inf E
+    \end{align*}
+    This means that the supremum of the set of lower bounds is the infimum of the subset itself.
+\end{theorem}
+
+\begin{proof}
+    Since $E$ is bounded by below, we have $L\neq \emptyset$. Notice, that since $L$ is the set of lower bounds, every element $e\in E$
+    is greater than every element $y\in L$. Hence, $L$ is bounded from above and $\exists\sup L\in S$, say $\alpha$.
+    
+    Next, notice that for any element $\gamma \in E$, we have that $\gamma \geq \alpha$ by definition. This is beacuse $\alpha$ is the
+    greatest element in $L$ and $L$ is the set of lower bounds. In words, $\alpha$ is the greatest lower bound. By definition,
+    $\alpha = \inf E$. 
+\end{proof}
+
+\pagebreak
+
+\section{Finite and Countable Sets}
+The notion of sets and the cardinality of those sets is obvious from prerequisite content. However, when we have an infinite set,
+there are different characteristics that should be discussed. Not all infinity is the same. 
+
+\begin{definition}
+    Let there exist a set $J_n$ where $n\in \mathbb{Z}^+$. For any set $A$, we say:
+    \begin{enumerate}[label=(\alph*)]
+        \item A is finite if $A \sim J_n$ for some $n$ ($\sim$ is an equivelance relation)
+        \item A is infinite if A is not finite
+        \item A is countable if $A\sim J_n$ (for some $n$)
+        \item A is uncountable if A is neither finite nor countable
+        \item A is at most countable if A is finite or countable
+    \end{enumerate}
+\end{definition}
+
+\noindent
+Another word for countable sets is enumerable/denumerable sets.
+
+\begin{example}
+    How do we arrange the set of all integers as a countable set?
+
+    \begin{proof} If we arrange the integers $A = \mathbb{Z}$ starting with 0 and then the positive
+        integer before that integer's additive inverse, then we can see that $\mathbb{Z}$ is countable.
+        \begin{align*}
+            A:\quad &0, 1, -1, 2, -2, 3, -3\\
+            J:\quad &1, 2, 3, 4, 5, 6, 7
+        \end{align*}
+    \end{proof}
+    In general, this would mean that we can define some function that shows $\mathbb{Z}$ is countable, like so:
+    \begin{align*}
+        \begin{cases}
+            0 & n = 0\\
+            \frac{n}{2} & n\equiv 0 \Mod{2}\\
+            \frac{-(n-1)}{2} & n\equiv 1 \Mod{2}
+        \end{cases}
+    \end{align*}
+\end{example}
+
+\pagebreak
+\begin{theorem}
+    Every infinite subset of a countable set $A$ is countable.
+
+    \begin{proof}
+        Since $A$ is countable and $E$ is an infinite subset, we can arrange $A$ in a way that makes it obvious that $A\sim J$. 
+        With this in mind, we can say every element of $A$ has a certain index. From this, we define $n_k$ as the $k^{th}$ value 
+        in $E$ (meaning $x_{n_k} \in E$). Let $x_{n_1}$ be the smallest value in $E$ and then define $n_2, n_3, ...$ as the next
+        smallest values. From this, we now see that $k$ is the index for the values in $E$. In other words, we have $f(k) = x_{n_k}$
+        showing that $E\sim J\implies E$ is countable.
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Let $A$ and $\Omega$ be sets and suppose that with each element $\alpha$ of $A$, there is an associated subset of $\Omega$
+    denoted by $E_\alpha$. Further, the set of sets (family or collection of sets) for all the difference $\alpha\in A$ is denoted
+    by $\{E_\alpha\}$
+\end{definition}
+
+\begin{theorem}
+    Let $\{E_n\}$ where $n\in \mathbb{Z}^+$ be a sequence of countable sets (elements are sets) and let
+    \begin{align*}
+        S = \bigcup_{n=1}^\infty E_n
+    \end{align*}
+    then $S$ is countable ($S\sim J$).
+\end{theorem}
+
+\begin{theorem}
+    The set of all rational numbers is countable.
+
+    \begin{proof}
+        At first glance, this does not look intuitive. However, if we construct $\mathbb{Q}$ as pairs of elements in $\mathbb{Z}$, then
+        $\mathbb{Q}$ is simply defined as $(a, b)$ with $a, b\in \mathbb{Z}$. In fact, if $b = 1$, then $(a, 1)$ with $a\in \mathbb{Z}$
+        is $\mathbb{Z}$ itself. We know that this set of pairs is countable, meaning that the rational numbers are countable.
+    \end{proof}
+\end{theorem}
+
+Not every infinite set is countable. A quick trivial example of this would be a set with elements $0$ or $1$ which cannot be indexed, this
+set is not countable (ex: $A = \{1, 0, 0, 1, 0, 1, 1, 1, ...\} \not\sim J$)
+
+\pagebreak
+
+\section{Fields}
+A field (from abstract algebra) has two operations: addition and multiplication. Further, it also has multiplicative inverses
+when the element is not zero.
 
 \begin{axiom}
-    0 is a natural number and if $n$ is a natural number, this implies that $n++$ is also a natural number.
-    This iteratively constructs the set $\mathbb{Z}$. 
+    Every field follows the following axioms: 
+    \begin{enumerate}[label=(\alph*)]
+        \item Axioms for addition
+            \begin{enumerate}[label=(\arabic*)]
+                \item $x, y\in F \implies x + y\in F$ 
+                \item $\forall x,y\in F:\ x + y = y + x$
+                \item $\forall x,y,z\in F:\ (x + y) + z = x + (y + z)$ 
+                \item $\exists\ 0\in F:\ 0 + x = x,\ \forall x\in F$
+                \item $\exists\ -x\in F\ \forall\ x\in F$ such that $-x + x = 0$
+            \end{enumerate}
+        \item Axioms for multiplication
+            \begin{enumerate}[label=(\arabic*)]
+                \item $x, y\in F \implies xy\in F$ 
+                \item $\forall x,y\in F:\ xy = yx$
+                \item $\forall x,y,z\in F:\ (xy)z = x(yz)$
+                \item $\exists\ 1\in F:\ 1x = x,\ \forall x\in F$
+                \item $\exists\ 1/x\in F\ \forall\ x\in F$ such that $x(1/x) = 1$
+            \end{enumerate}
+        \item Distributive laws
+            \begin{align*}
+                x(y + z) = xy + xz\quad \forall x,y,z\in F
+            \end{align*}
+    \end{enumerate}
 \end{axiom}
 
-\begin{axiom}
-    Further, it is not possible to reach $0$ from any other natural number. In other words, 
-    $0$ is the successor of no natural number.
-\end{axiom}
+There are numerous theorems that can be proved from here which define standard algebraic operations. Many of these are trivial and
+will be omitted accordingly.
 
-There is another issue with this definition and it is given by the fact that this does not 
-definitievely construct the natural numbers as $0 \to 1 \to 2 \to 2 \to 2 \to 2 \to \cdots$
-is a valid number system by this design. We want to limit this from happening by introducing:
+\begin{theorem}
+    The field R which is ordered and has the least upper-bound property. 
+\end{theorem}
 
-\begin{axiom}
-    If two natural numbers are different, then their successors are also different. In other words,
-    $m \neq n \implies m\tiny{++} \neq n\tiny{++}$.
-\end{axiom}
+Reminder, this property is if a bound exists on a nonempty subset, then $\sup E$ exists (if $E\subset R$)
 
-\vspace{1cm}
+\pagebreak
 
+\begin{theorem} Archimedean property (a) and Q dense in R (b)
+    \begin{enumerate}[label=(\alph*)]
+        \item $x,y\in R$ with $x > 0 \implies \exists\ n\in \mathbb{Z}^+: nx > y$
+        \item $x,y\in R$ with $x < y \implies \exists\ p\in \mathbb{Q}: x < p < y$
+    \end{enumerate}
+
+    The proof is simple, but not important. (a) is proved using a contradiction assuming that $y$ is the upper bound of the set, which
+    is false. (b) is a bit more tricky, but essentially concludes that $\mathbb{Q}$ is dense in $\mathbb{R}$ and between any
+    two irrational numbers exists a rational number (given by $p\in \mathbb{Q}$)
+\end{theorem}
+
+\begin{theorem}
+    $\forall x>0\in R, n>0\in \mathbb{Z}$, there exists a unique $y\in R: y^n = x$
+\end{theorem}
+
+The proof of this theorem makes use of showing contradictions appear for when $y^n < x$ and $y^n > x$ leaving $y^n = x$ as the
+only remaining option.
 \end{document}
-
